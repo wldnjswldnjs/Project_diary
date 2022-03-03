@@ -13,21 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic.base import TemplateView
-from django.conf.urls.static import static
+from django.urls import path
+from users import views
 from django.conf import settings
+from django.conf.urls.static import static
 
-# ROOT_URLConf
-# 여기까지의 경로는 => http://127.0.0.1:8000/
+
+# namespace설정
+app_name = 'users'
+
+# users application의 URLConf
+# => http://127.0.0.1:8000/users/
+
 urlpatterns = [
-                  path('', TemplateView.as_view(template_name='main.html'), name='home'), # main page
-                  path('admin/', admin.site.urls), # Admin page
-                  # http://127.0.0.1:8000/diary_main/ 로 시작하면 include()를 이용해서
-                  # application 안의 URLConf로 이동
-                  # path('bbs/', include('bbs.urls')),  # 기본으로 잡힌 url에서 bbs/로 끝나서 앞부분 url과 맵핑이 되면 bbs.url로 넘겨준다는 의미
-                  # path('users/', include('users.urls')), # users로 시작하면 users밑에있는 users.urls.py에서 처리하겠다는 의미
-
-              ] + static(settings.MEDIA_URL,
-                         document_root=settings.MEDIA_ROOT)
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('loginProcess/', views.login_process, name='login_process'),
+    path('signup/', views.signup, name='signup')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-
 # class명이 Board이면 만들어지는 실제 table이름은 bbs_board이 되요!
 # class는 반드시 장고가 제공하는 class를 상속받아서 만들어야 해요!
 # Database Table이 가지고 있는 각각의 column을
@@ -19,9 +18,9 @@ class Board(models.Model):
     # auto_now=True => 현재시간이 자동으로 삽입
     b_comment_count = models.IntegerField(default=0)  # 댓글 개수
     b_like_count = models.IntegerField(default=0)  # 좋아요 개수
-    b_img = models.ImageField(upload_to="",
-                              blank=True,
-                              null=True)
+    b_img = models.ImageField(upload_to=settings.MEDIA_ROOT,
+                                blank=True,
+                                null=True)
 
     def __str__(self):
         return self.b_title
