@@ -28,8 +28,8 @@ urlpatterns = [
     # http://127.0.0.1:8000/bbs/ 로 시작하면 include()를 이용해서
     # application 안의 URLConf로 이동
     # path('bbs/', include('bbs.urls')),  # 기본으로 잡힌 url에서 bbs/로 끝나서 앞부분 url과 맵핑이 되면 bbs.url로 넘겨준다
-                  # 는 의미
     # path('users/', include('users.urls')), # users로 시작하면 users밑에있는 users.urls.py에서 처리하겠다는 의미
-    path('list/', views.b_list, name='b_list')
+    path('list/', views.b_list, name='b_list'),
+    path('<int:board_id>/detail/', views.b_detail, name='b_detail'),
 ] + static(settings.MEDIA_URL,
            document_root=settings.MEDIA_ROOT)

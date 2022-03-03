@@ -11,6 +11,9 @@
     글번호 : <span id="post_id">{{ detail_form.initial.id }}</span>
     <br>
     {% bootstrap_form detail_form %}
+    {% for photo in board.photo_set.all %}
+        <img src="{{ board.b_img.url }}" width="50"><br>
+    {% endfor %}
     <br>
     <button class="btn btn-success"
             onclick="to_list()">리스트로 돌아가기</button>
@@ -19,6 +22,9 @@
             onclick="delete_post()">삭제</button>
     <button class="btn btn-warning"
             onclick="like_post()">좋아요</button>
+    <button class="btn btn-success"
+            onclick="to_list()">이미지 보여랍</button>
+
 </div>
 <br><br>
 

@@ -12,14 +12,13 @@ class BoardForm(forms.ModelForm):
         model = Board
         # fields = "__all__"
         fields = ['b_title', 'b_img', 'b_author', 'b_content']
-        #
         labels = {
             'b_title': '글 제목',
             'b_img': '이미지',
             'b_author': '글 작성자',
             'b_content': '글 내용'
         }
-        #
+
         widgets = {
             'b_title': forms.TextInput(
                 attrs={
