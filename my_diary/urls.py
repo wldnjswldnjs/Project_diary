@@ -33,5 +33,5 @@ urlpatterns = [
     # application 안의 URLConf로 이동
     # path('bbs/', include('bbs.urls')),  # 기본으로 잡힌 url에서 bbs/로 끝나서 앞부분 url과 맵핑이 되면 bbs.url로 넘겨준다는 의미
     # path('users/', include('users.urls')), # users로 시작하면 users밑에있는 users.urls.py에서 처리하겠다는 의미
-] + static(settings.MEDIA_URL,
-           document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL,
+          document_root=settings.MEDIA_ROOT)

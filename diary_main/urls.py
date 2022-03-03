@@ -13,16 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic.base import TemplateView
+
+from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from diary_main import views
 
 app_name = 'diary_main'
 # ROOT_URLConf
-# 여기까지의 경로는 => http://127.0.0.1:8000/diary_main
+# 여기까지의 경로는 => http://127.0.0.1:8000/diary_main/
 urlpatterns = [
     path('create/', views.b_create, name='b_create'),
     # http://127.0.0.1:8000/bbs/ 로 시작하면 include()를 이용해서
