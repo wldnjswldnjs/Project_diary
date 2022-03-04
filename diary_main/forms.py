@@ -16,7 +16,7 @@ class BoardForm(forms.ModelForm):
             'b_title': '글 제목',
             'b_img': '이미지',
             'b_author': '글 작성자',
-            'b_content': '글 내용'
+            'b_content': '글 내용',
         }
 
         widgets = {

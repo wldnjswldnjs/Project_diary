@@ -5,6 +5,9 @@ function to_list() {
     document.location.href = '/diary_main/list/'
 }
 
+
+}
+
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())

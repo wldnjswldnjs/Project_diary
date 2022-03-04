@@ -16,6 +16,7 @@ def b_list(request):
     # else:
     #     return redirect('home')
 
+
 @require_http_methods(['GET', 'POST'])
 def b_create(request):
     # request 방식이 GET인지 POST인지 구분해서 처리
@@ -45,6 +46,7 @@ def b_create(request):
             # new_post.b_like_count = 10
             # new_post.save()
             return redirect('diary_main:b_list',)
+
 
 @require_safe
 def b_detail(request, board_id):

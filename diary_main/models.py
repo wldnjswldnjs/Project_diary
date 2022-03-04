@@ -19,8 +19,8 @@ class Board(models.Model):
     b_comment_count = models.IntegerField(default=0)  # 댓글 개수
     b_like_count = models.IntegerField(default=0)  # 좋아요 개수
     b_img = models.ImageField(upload_to=settings.MEDIA_ROOT,
-                                blank=True,
-                                null=True)
+                              blank=True,
+                              null=True)
 
     def __str__(self):
         return self.b_title
@@ -36,3 +36,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.c_content
+
+
+class Openapi(models.Model):
+    placesSearchCB = models
