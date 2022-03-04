@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'my_diary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'my_diary_db',
+        'NAME': 'my_diary_db_test',
         'USER': 'root',
-        'PASSWORD': 'test1234',
+        'PASSWORD': 'yu974346!',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
