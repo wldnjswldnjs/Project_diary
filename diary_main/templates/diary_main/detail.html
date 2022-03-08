@@ -2,83 +2,88 @@
 {% load bootstrap4 %}
 
 {% block html_header %}
-<script src="/static/js/menu_btn.js"></script>
-<style>
-    .img_size {
-        width: 300px;
-        height: 300px;
-    }
-</style>
+    <script src="/static/js/menu_btn.js"></script>
+    <style>
+        .img_size {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 {% endblock %}
 
 {% block html_body %}
-<div class="container">
-    <h1>상세 보기</h1>
-    <!--<h2>{{ post.id}} 번째글</h2>-->
-    글번호 : <span id="post_id">{{ post.id }}</span>
-    <hr>
-    <p>제목 : {{ post.b_title}}</p>
-    {% if post.b_img %}
-    <div class="img_size">
-        <img src="{{ post.b_img.url}}" width="100%" height="100%">
+    <div class="container">
+        <h1>상세 보기</h1>
+        <!--<h2>{{ post.id}} 번째글</h2>-->
+        글번호 : <span id="post_id">{{ post.id }}</span>
+        <hr>
+        <p>제목 : {{ post.b_title}}</p>
+        {% if post.b_img %}
+            <div class="img_size">
+                <img src="{{ post.b_img.url}}" width="100%" height="100%">
+            </div>
+        {% else %}
+            <p>이미지가 없습니다</p>
+        {% endif %}
+        <p>내용 : {{ post.b_content }}</p>
+        <p>작성자 : {{ post.b_author }}</p>
+        <p>지도 :{{ post.b_map }}</p>
+        <p>댓글 개수 :{{ post.b_comment_count }}</p>
+        <p>좋아요 개수 :{{ post.b_like_count }}</p>
+
+
+        <div id="map" style="width:100%;height:350px;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
+        <script src="/static/js/map_tmp.js"></script>
+        <hr>
+        <button class="btn btn-success"
+                onclick="to_list()">리스트로 돌아가기</button>
+        <button class="btn btn-primary"
+                onclick="edit_post()">수정</button>
+        <button class="btn btn-danger"
+                onclick="delete_post()">삭제</button>
+        <button class="btn btn-warning"
+                onclick="like_post()">좋아요</button>
+        <input type="hidden" id="map_location" value="{{ post.b_map}}">
     </div>
-    {% else %}
-        <p>이미지가 없습니다</p>
-    {% endif %}
-    <p>내용 : {{ post.b_content }}</p>
-    <p>작성자 : {{ post.b_author }}</p>
-    <p>지도 :{{ post.b_map }}</p>
-    <p>댓글 개수 :{{ post.b_comment_count }}</p>
-    <p>좋아요 개수 :{{ post.b_like_count }}</p>
 
+    <br><br>
+    <div class="container">
+        <h3>댓글</h3>
+        <label for="c_name">이름</label>
+        <input type="text"
+               class="form-control w-25"
+               id="c_name">
 
-    <div id="map" style="width:100%;height:350px;"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b1cecff12a8ce2189e4ab1ef565b2b3&libraries=services"></script>
-    <script src="/static/js/map_tmp.js"></script>
-    <hr>
-    <button class="btn btn-success"
-            onclick="to_list()">리스트로 돌아가기</button>
-    <button class="btn btn-primary">수정</button>
-    <button class="btn btn-danger"
-            onclick="delete_post()">삭제</button>
-    <button class="btn btn-warning"
-            onclick="like_post()">좋아요</button>
-    <input type="hidden" id="map_location" value="{{ post.b_map}}">
-</div>
-<br><br>
-<div class="container">
-    <h3>댓글</h3>
-    <label for="c_name">이름</label>
-    <input type="text"
-           class="form-control w-25"
-           id="c_name">
+        <label for="c_content">내용</label>
+        <input type="text"
+               class="form-control w-50"
+               id="c_content">
+        <button type="button"
+                class="btn btn-info"
+                onclick="create_comment()">댓글 등록</button>
 
-    <label for="c_content">내용</label>
-    <input type="text"
-           class="form-control w-50"
-           id="c_content">
-    <button type="button"
-            class="btn btn-info"
-            onclick="create_comment()">댓글 등록</button>
-
-    <table class="table table-hover">
-        <thead class="thread-dark">
+        <table class="table table-hover">
+            <thead class="thread-dark">
             <tr>
                 <th scope="col">댓글 작성자</th>
                 <th scope="col">댓글 내용</th>
                 <th scope="col">삭제</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for comment in comments %}
-            <tr>
-                <td>{{ comment.c_author }}</td>
-                <td>{{ comment.c_content }}</td>
-                <td><button class="btn btn-danger">삭제</button></td>
-            </tr>
+                <tr>
+                    <td>{{ comment.c_author }}</td>
+                    <td>{{ comment.c_content }}</td>
+                    <td><button class="btn btn-danger">삭제</button></td>
+                </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-<br><br><br>
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
 {% endblock %}
+
+<a href="/diary_main/detail/{{post_id}}/edit/"><button>수정</button></a>
+

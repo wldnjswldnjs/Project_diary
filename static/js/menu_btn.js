@@ -81,3 +81,15 @@ function create_comment() {
     })
 }
 
+function edit_post() {
+    //내가 어떤글을 삭제할지 알아야 함!
+    // alert($('#post_id').text())
+    let result = confirm("수정하시겠습니까?")
+    // confirm 확인을 받기위한 대화창을 띄워줌 (True, False)결과가 떨어짐
+    if(result) {
+        let queryString = "?post_id=" + $('#post_id').text()
+        // "?post_id =6"
+        document.location.href = '/diary_main/edit/' + queryString
+    }
+}
+
