@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from diary_main.models import Board, Comment
-from diary_main.forms import BoardForm
+from diary_main.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
@@ -45,7 +45,7 @@ def b_create(request):
             # new_post = board_form.save(commit=False)  # 실제로 저장되지 않아요. 대신 객체를 리턴해요
             # new_post.b_like_count = 10
             # new_post.save()
-            return redirect('diary_main:b_list',)
+            return redirect('diary_main:b_list')
 
 
 @require_safe
@@ -69,7 +69,7 @@ def b_detail(request, board_id):
     # return render(request, 'diary_main/detail.html', context)
     post = Board.objects.get(pk=board_id)
     context = {
-        'post':post,
+        'post': post,
     }
     return render(request, 'diary_main/detail.html', context)
 
@@ -80,7 +80,7 @@ def b_delete(request):
     post = get_object_or_404(Board, pk=post_id)
     post.delete()
 
-    return redirect('bbs:b_list')
+    return redirect('diary_main:b_list')
 
 
 def b_like(request):
@@ -89,12 +89,12 @@ def b_like(request):
     post.b_like_count += 1
     post.save()
 
-    board_detail_form = BoardDetailForm(instance=post)
-    context = {
-        "detail_form": board_detail_form
-    }
+    # board_detail_form = BoardDetailForm(instance=post)
+    # context = {
+    #     "detail_form": board_detail_form
+    # }
 
-    return render(request, 'diary_main/detail.html', context)
+    return render(request, 'diary_main/detail.html')
 
 
 def create_comment(request):

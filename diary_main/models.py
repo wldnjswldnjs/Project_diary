@@ -19,8 +19,8 @@ class Board(models.Model):
     b_comment_count = models.IntegerField(default=0)  # 댓글 개수
     b_like_count = models.IntegerField(default=0)  # 좋아요 개수
     b_img = models.ImageField(upload_to=settings.MEDIA_ROOT,
-                                blank=True,
-                                null=True)
+                              blank=True,
+                              null=True)
     b_map = models.CharField(max_length=50)
 
     def __str__(self):
