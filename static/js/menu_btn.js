@@ -40,9 +40,13 @@ function create_comment() {
             let author_td = $('<td></td>').text(result['c_author'])
             let content_td = $('<td></td>').text(result['c_content'])
             let btn_td = $('<td></td>')
+            // 이 삭제 버튼을 눌렀을 때 삭제 처리를 해야한다.
             let btn = $('<button></button>').text('삭제').addClass('btn btn-danger')
-            btn.on('click', function () {
+            // btn 이벤트 처리
+            btn.on('click',function (){
+                // ajax호출해서 서버쪽 댓글 삭제해야함
                 $.ajax({
+                    // key와 value널어서 삭제해 주자!
                     async: true,
                     url: '/diary_main/commentDelete/',
                     type: 'GET',
@@ -52,24 +56,28 @@ function create_comment() {
                     dataType: 'json',
                     timeout: 3000,
                     success: function () {
-                        alert('댓글 삭제 성공')
-                        $('#comment_' + result['c_id']).remove()
+                        // id를 찾아 지우자
+                        $('#comment_'+ result['c_id']).remove() // 이렇게 처리하면 화면에서 지울 수 있다!
+                        // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
+                        // url을 만들러 url.py로 이동하자!
+                        // 이경우에 ajax처리를 통해 동적으로 버튼을 추가하여 이미 만들어진 댓글은 삭제 불가!
+                        // 즉 새로운 이벤트로 추가된 댓글만 삭제가 됨
+                        // 그럼 기존에 있던 댓글은 어떻게 제거하는가?
                     },
-                    error: function () {
-                        alert('댓글 삭제 실패')
+                    error: function (){
+
                     }
                 })
             })
-
             btn_td.append(btn)
             tr.append(author_td)
             tr.append(content_td)
             tr.append(btn_td)
             $('tbody').prepend(tr)
         },
-        error: function () {
-            alert('먼가 이상해요')
+        error: function() {
+            alert('먼가 이상해요!')
         }
-
     })
 }
+

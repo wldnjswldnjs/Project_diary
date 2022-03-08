@@ -24,25 +24,14 @@
 
 {% block html_body %}
 <main class="form-signin">
-<!--  bootstrap login form templates-->
-<!--
-  <form>
-    <img class="mb-4" src="/static/img/7log_icon.png" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">오늘도 당신의 이야기를 들려주세요!</h1>
-
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">id</label>
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-  </form>
- -->
+    {% endfor %}
 
 <!-- 내가 만든 login form -->
     <form action="/users/loginProcess/"

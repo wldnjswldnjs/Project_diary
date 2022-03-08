@@ -1,7 +1,43 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block html_header %}
-<script src = "/static/js/menu_btn.js"></script>
-<script src = "/static/js/id_check.js"></script>
+<script src = "/static/js/menu_btn.js">
+	/* 중복체크! */
+	$(function(){
+		$('#btn_login').click(function(){
+			var username = $('#username').val()
+			if(username == ''){
+				alert('이메일을 입력해주세요.')
+				return;
+			}
+			$.ajax({
+				url:'/api/check_username/?username='+username,
+				type:'get',
+				dataType:'json',
+				success:function(response){
+					if(response.result != 'success'){
+						console.error(response.data)
+						return;
+					}
+					if(response.data == 'exist'){
+						alert("존재하는 이메일 입니다!ㅇㅠㅇ");
+						$('#username').val('').focus();
+						return;
+					}else{
+						$('#img-email').show();
+						$('#btn_login').hide();
+						return;
+					}
+				},
+                error : function(xhr, error){
+					alert("서버와의 통신에서 문제가 발생했습니다.");
+					console.error("error : " + error);
+				}
+			})
+		})
+
+</script>
 <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -56,7 +92,8 @@
                 <input type="text" class="form-control" name="username" id="username"
                        placeholder="아이디를 입력하세요.">
 
-            <button type="button" onclick="username_check()" id="btn_username_check">중복검사</button>
+            <button type="button" class="id_overlap_button" onclick="id_overlap_check()">중복검사</button>
+            <img id="id_check_sucess" style="display: none;">
             </div>
 
             <div class="form-group">
