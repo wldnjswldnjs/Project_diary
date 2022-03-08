@@ -17,7 +17,7 @@ function delete_post() {
     }
 }
 
-function  like_post() {
+function like_post() {
     let queryString = "?post_id=" + $('#post_id').text()
     document.location.href = '/diary_main/like/' + queryString
 }
