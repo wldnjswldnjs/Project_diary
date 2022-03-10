@@ -5,6 +5,8 @@ function to_list() {
     document.location.href = '/diary_main/list/'
 }
 
+
+
 function delete_post() {
     //내가 어떤글을 삭제할지 알아야 함!
     // alert($('#post_id').text())
@@ -29,15 +31,31 @@ function create_comment() {
         url: "/diary_main/createComment/",
         type: 'GET',
         data: {
+            // 댓글에대한 게시글 id, 댓글에대한 작성자, 댓글 내용이 필요
             board_id: $('#post_id').text(),
             comment_author: $('#c_name').val(),
             comment_content: $('#c_content').val()
         },
         dataType: 'json',   // 서버프로그램이 결과로 돌려주는 값은 JSON
         timeout: 3000,
-        success: function (result) {
-            let tr = $("<tr></tr>").attr('id', 'comment_' + result['c_id'])
-            let author_td = $('<td></td>').text(result['c_author'])
+        success: function(result) {
+            // 이제 json을통해 데이터를 가져와 화면에 띄워준다.
+            // 결과로 오는 result 는 이렇게 생겼고
+            //     'c_id': comment.id,
+            //     'c_author': comment.c_author,
+            //     'c_content': comment.c_content
+            // 호면 구성은 이렇게 생김
+            // <tr>
+            //     <td>{{comment.c_author}}</td>
+            //     <td>{{comment.c_content}}</td>
+            //     <td>
+            //         <button class="btn btn-danger">삭제</button>
+            //     </td>
+            // </tr>
+            // 이거를 수정하자
+
+            let tr = $("<tr></tr>").attr('id','comment_'+ result['c_id']) // tr에 id를 지정해서 삭제시킴
+            let autrhor_td = $('<td></td>').text(result['c_author'])
             let content_td = $('<td></td>').text(result['c_content'])
             let btn_td = $('<td></td>')
             // 이 삭제 버튼을 눌렀을 때 삭제 처리를 해야한다.
@@ -48,7 +66,7 @@ function create_comment() {
                 $.ajax({
                     // key와 value널어서 삭제해 주자!
                     async: true,
-                    url: '/diary_main/commentDelete/',
+                    url:'/diary_main/commentDelete',
                     type: 'GET',
                     data: {
                         comment_id: result['c_id']
@@ -70,7 +88,7 @@ function create_comment() {
                 })
             })
             btn_td.append(btn)
-            tr.append(author_td)
+            tr.append(autrhor_td)
             tr.append(content_td)
             tr.append(btn_td)
             $('tbody').prepend(tr)
@@ -79,23 +97,4 @@ function create_comment() {
             alert('먼가 이상해요!')
         }
     })
-}
-
-function edit_post() {
-    //내가 어떤글을 삭제할지 알아야 함!
-    // alert($('#post_id').text())
-    let result = confirm("수정하시겠습니까?")
-    // confirm 확인을 받기위한 대화창을 띄워줌 (True, False)결과가 떨어짐
-    if(result) {
-        let queryString = "?post_id=" + $('#post_id').text()
-        // "?post_id =6"
-        document.location.href = '/diary_main/edit/' + queryString
-    }
-}
-
-function name_push() {
-    alert('실패했습니다!');
-    let aa = $('#name_load').text()
-    $('#username').val(aa)
-
 }
