@@ -93,3 +93,9 @@ function edit_post() {
     }
 }
 
+function name_push() {
+    alert('실패했습니다!');
+    let aa = $('#name_load').text()
+    $('#username').val(aa)
+
+}
