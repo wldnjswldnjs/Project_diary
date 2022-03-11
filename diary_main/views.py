@@ -95,6 +95,7 @@ def b_detail(request, board_id):
 #
 #     return render(request, 'diary_main/detail.html', context)
 
+
 def b_delete(request):
     # QueryString으로 전달된 삭제할 글 번호부터 뽑아요
     post_id = request.GET['post_id']
@@ -103,19 +104,23 @@ def b_delete(request):
 
     return redirect('diary_main:b_list')
 
+
 def b_like(request):
     post_id = request.GET['post_id']
     post = get_object_or_404(Board, pk=post_id)
+    # post.b_like_count += 1
+    # context = {
+    #     'post': post
+    # }
+    # post.save()
+
     post.b_like_count += 1
+    board_detail_form = BoardDetailForm(instance=post)
     context = {
+        "detail_form": board_detail_form,
         'post': post
     }
     post.save()
-
-    # board_detail_form = BoardDetailForm(instance=post)
-    # context = {
-    #     "detail_form": board_detail_form
-    # }
 
     return render(request, 'diary_main/detail.html', context)
 
@@ -141,15 +146,10 @@ def create_comment(request):
         json_dumps_params={'ensure_ascii': True})
 
 
-
-
-
-def delete_comment(request):
+def comment_delete(request):
     comment = get_object_or_404(Comment, pk=request.GET['comment_id'])
     comment.delete()
     return JsonResponse({}, json_dumps_params={'ensure_ascii': True})
-
-
 
 
 def b_update(request, board_id):
