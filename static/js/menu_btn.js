@@ -99,7 +99,7 @@ function create_comment() {
             $('tbody').prepend(tr)
         },
         error: function() {
-            alert('먼가 이상해요!')
+            alert('댓글을 작성해주세요')
         }
     })
 }

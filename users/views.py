@@ -75,7 +75,6 @@ def home(request):
     return HttpResponse('Home!')
 
 
-
 # 회원가입
 def signup2(request):
     if request.method == 'POST':

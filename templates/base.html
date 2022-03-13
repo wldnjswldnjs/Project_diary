@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <title>Sample Project</title>
 
-    <!-- 구글 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
-
-
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
@@ -28,8 +22,15 @@
 
     <style>
         /* font family 수정하기 */
-        .logo_font{font-family: 'Hi Melody', cursive;}
-        p{font-family: 'Hi Melody', cursive;}
+        @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body{
+            font-family: 'GangwonEdu_OTFBoldA';
+        }
 
         .bd-placeholder-img {
             font-size: 1.125rem;

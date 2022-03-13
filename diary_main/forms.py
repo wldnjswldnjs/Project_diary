@@ -7,11 +7,10 @@ from django import forms
 from diary_main.models import *
 
 
-
 class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['b_title', 'b_img', 'b_author', 'b_content','b_map']
+        fields = ['b_title', 'b_img', 'b_author', 'b_content', 'b_map']
         labels = {
             'b_title': '글 제목',
             'b_img': '이미지',

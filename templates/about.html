@@ -5,10 +5,6 @@
     <meta charset="utf-8">
     <title>7log about z_z</title>
 
-    <!-- 구글 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
 
@@ -33,8 +29,15 @@
 
     <style>
         /* font family 수정하기 */
-        .logo_font{font-family: 'Hi Melody', cursive;}
-        p{font-family: 'Hi Melody', cursive;}
+        @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body{
+            font-family: 'GangwonEdu_OTFBoldA';
+        }
 
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -99,14 +102,14 @@
                         <p style= color:#ffff;>
 
                             {% if request.user.is_authenticated %}
-                            {{ user.nickname }}
-                            <img src="{{ users.image.url }}" width="50" height="50">
-                            <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
+                                {{ user.nickname }}
+                                <img src="{{ user.image.url }}" width="50" height="50">
+                                <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
-                            7log와 함께 당신의 이야기를 시작해보세요! -> &nbsp;&nbsp;&nbsp;
-                            <a class="btn btn-lg btn-primary" href="/users/signup/">Sign up</a>
-                            <a class="btn btn-lg btn-info" href="/users/login/">login</a>
+                                7log와 함께 당신의 이야기를 시작해보세요! -> &nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-lg btn-primary" href="/users/signup/">Sign up</a>
+                                <a class="btn btn-lg btn-info" href="/users/login/">login</a>
 
                             {% endif %}
                         </p>

@@ -5,13 +5,13 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_safe
 
+
 def b_list(request):
     posts = Board.objects.all().order_by('-id')
     context = {
         "posts": posts
     }
     return render(request, 'diary_main/list.html', context)
-
 
 
 @require_http_methods(['GET', 'POST'])
@@ -100,6 +100,9 @@ def create_comment(request):
     comment.c_content = request.GET['comment_content']
     comment.board_id = request.GET['board_id']
 
+    if not comment.c_content:
+        return redirect('diary_main:b_detail')
+
     comment.save()
 
     # AJAX로 호출되었기 때문에 그 결과가 JSON으로 나가야해요
@@ -130,7 +133,7 @@ def b_update(request, board_id):
         context = {
             "detail_update_form": board_update_form,
             'comments': comments,
-            'post':post
+            'post': post
         }
 
         return render(request, 'diary_main/update.html', context)
@@ -140,4 +143,4 @@ def b_update(request, board_id):
         post.b_content = request.POST['b_content']
         post.b_map = request.POST['b_map']
         post.save()
-        return redirect('/diary_main/'+ str(post.id)+'/detail/')
+        return redirect('/diary_main/' + str(post.id)+'/detail/')
