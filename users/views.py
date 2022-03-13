@@ -9,10 +9,8 @@ from users.models import Member
 # 만든 loginForm 불러오기
 from users.forms import LoginForm
 
-
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-
 
 
 # Create your views here.
@@ -32,8 +30,6 @@ def login(request):
         login_form = LoginForm(request.POST)
         username = login_form.data['username']
         password = login_form.data['password']
-
-
 
         # 로그인 인증처리
         user = authenticate(username=username,
@@ -84,10 +80,15 @@ def signup2(request):
         password = request.POST.get('password1')
         password2 = request.POST.get('password2')
         image = request.FILES.get('image')
+        # if request.FILES.get('image'):
+        #     image = request.FILES.get('image')
+        # else:
+        #     image = 'C:/python-django/AI_Project/static/img/짱구.jpeg'
+
         print(password != password2)
 
-        if not (username and nickname and password and password2):
-            messages.warning(request, "프로필 사진을 제외한 모든 칸을 채워주세용!")
+        if not (username and nickname and password and password2 and image):
+            messages.warning(request, "모든 칸을 채워주세용!")
             return redirect('users:signup')
 
         elif password != password2:

@@ -1,7 +1,7 @@
 from django import forms
 from users.models import Member
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import get_user_model
 
 
 # 장고의 ModelForm을 상속 받아서 사용
@@ -31,8 +31,6 @@ class LoginForm(forms.ModelForm):
             )
         }
 
-
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 

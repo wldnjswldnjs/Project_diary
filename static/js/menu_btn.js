@@ -99,25 +99,25 @@ function create_comment() {
             $('tbody').prepend(tr)
         },
         error: function() {
-            alert('댓글을 작성해주세요')
+            alert('댓글을 작성해주세요!')
         }
     })
 }
 
-function delete_coment() {
+function delete_comment() {
     $.ajax({
         // key와 value널어서 삭제해 주자!
         async: true,
         url:'/diary_main/commentDelete',
         type: 'GET',
         data: {
-            comment_id: $('#coment_id').text()
+            comment_id: $('#comment_id').text()
         },
         dataType: 'json',
         timeout: 3000,
         success: function () {
             // id를 찾아 지우자
-            $('#coment_id_head').remove()
+            $('#comment_id_head').remove()
             // 이렇게 처리하면 화면에서 지울 수 있다!
             // 서버쪽에서 처리가 되야지 succes가 처리가 되어 화면이 처리가 될테니
             // url을 만들러 url.py로 이동하자!

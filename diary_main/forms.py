@@ -53,7 +53,7 @@ class BoardForm(forms.ModelForm):
 class BoardDetailForm(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['b_title', 'b_content', 'b_author', 'b_like_count']
+        fields = ['b_like_count', 'b_title', 'b_author', 'b_content']
         labels = {
                     'b_title': '글 제목',
                     'b_author': '글 작성자',
@@ -78,7 +78,8 @@ class BoardDetailForm(forms.ModelForm):
             'b_content': forms.Textarea(
                 attrs={
                     'readonly class': 'form-control-plaintext w-100',
-                    'disabled':'readonly'
+                    'disabled':'readonly',
+                    'id':'textarea'
                 }
             ),
             'b_like_count': forms.TextInput(
@@ -121,5 +122,4 @@ class BoardUpdateForm(forms.ModelForm):
             )
 
         }
-
 

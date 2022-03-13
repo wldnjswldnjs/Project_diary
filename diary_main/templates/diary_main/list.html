@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block html_header %}
 <link href="/static/css/carousel.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 <script src="/static/js/menu_btn.js"></script>
@@ -25,7 +25,7 @@
                         <a class="nav-link" href="/howtouse/">how to use</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/dashboard/">DashBoard</a>
+                        <a class="nav-link active" aria-current="page" href="/diary_main/list/">DashBoard</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -52,7 +52,7 @@
 
                             {% if request.user.is_authenticated %}
                             {{ user.nickname }}
-                            <img src="{{ user.image.url }}" width="50" height="50">
+                            <img class="box" src="{{ user.image.url }}" width="50" height="50">
                             <a class="btn btn-lg btn-danger" href="/users/logout/">logout</a>
 
                             {% else %}
@@ -71,32 +71,34 @@
 <main>
     <br><br>
     <div class="container">
+        {% if request.user.is_authenticated %}
         <button type="button"
                 class="btn-primary"
                 onclick="new_post()">새글 작성
         </button>
+        {% endif %}
         <div class="m-1"></div>
 
         <table class="table table-hover">
             <thead class="thread-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">글 제목</th>
-                <th scope="col">글 작성자</th>
-                <th scope="col">글 작성일</th>
-                <th scope="col">댓글 개수</th>
-                <th scope="col">좋아요 개수</th>
+                <th scope="col" style="text-align: center">#</th>
+                <th scope="col" style="text-align: center">글 제목</th>
+                <th scope="col" style="text-align: center">글 작성자</th>
+                <th scope="col" style="text-align: center">글 작성일</th>
+<!--                <th scope="col" style="text-align: center">댓글 개수</th>-->
+                <th scope="col" style="text-align: center">좋아요 개수</th>
             </tr>
             </thead>
             <tbody>
             {% for post in posts %}
             <tr>
-                <td>{{ post.id }}</td>
-                <td><a href="/diary_main/{{ post.id }}/detail/">{{ post.b_title }}</a></td>
-                <td>{{ post.b_author }}</td>
-                <td>{{ post.b_date }}</td>
-                <td>{{ post.b_comment_count }}</td>
-                <td>{{ post.b_like_count }}</td>
+                <td style="text-align: center">{{ post.id }}</td>
+                <td style="text-align: center"><a href="/diary_main/{{ post.id }}/detail/">{{ post.b_title }}</a></td>
+                <td style="text-align: center">{{ post.b_author }}</td>
+                <td style="text-align: center">{{ post.b_date }}</td>
+<!--                <td style="text-align: center">{{ post.b_comment_count }}</td>-->
+                <td style="text-align: center">{{ post.b_like_count }}</td>
             </tr>
             {% endfor %}
             </tbody>

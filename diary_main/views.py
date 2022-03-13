@@ -8,6 +8,7 @@ from django.views.decorators.http import require_safe
 
 def b_list(request):
     posts = Board.objects.all().order_by('-id')
+
     context = {
         "posts": posts
     }
@@ -65,8 +66,6 @@ def b_detail(request, board_id):
     }
 
     return render(request, 'diary_main/detail.html', context)
-
-
 
 
 def b_delete(request):
