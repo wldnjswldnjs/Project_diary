@@ -227,8 +227,8 @@
             <tr>
                 <th scope="col" hidden>#</th>
                 <th scope="col">댓글 작성자</th>
-                <th scope="col" style="text-align: center">댓글 내용</th>
-                <th scope="col" style="text-align: right">삭제</th>
+                <th scope="col">댓글 내용</th>
+                <th scope="col">삭제</th>
             </tr>
             </thead>
             <tbody>
@@ -238,7 +238,7 @@
                 <td>{{ comment.c_author }}</td>
                 <td>{{ comment.c_content }}</td>
                 {% if comment.c_author == user.nickname %}
-                <td style="text-align: right">
+                <td>
                     <button class="btn btn-danger" onclick="delete_comment()">삭제</button>
                 </td>
                 {% endif %}

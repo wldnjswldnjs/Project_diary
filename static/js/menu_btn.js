@@ -6,6 +6,7 @@ function to_list() {
 }
 // 네비바에서 작성자의 닉네임을 가져와 <span>(hidden)으로 설정 그 후 forms.py에 있는 b_author에 값을 넣어줌 (id값 username)
 // 그 값 기준으로 detail에 넣어줌
+
 function name_push() {
     let aa = $('#name_load').text()
     $('#username').val(aa)
